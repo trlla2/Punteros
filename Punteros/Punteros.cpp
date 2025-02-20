@@ -1,7 +1,24 @@
-
 #include <iostream>
+#define NUM_STUDENTS 50
+#define NUM_CLASSES 10
 
-int main()
+struct Student { // 24 
+	int id; // 4
+	std::string name; //16?
+	int age; // 4
+};
+
+struct Class {
+	std::string className; //16?
+	Student students[NUM_STUDENTS]; // 24 * 50
+};
+
+struct School {
+	std::string schoolName;
+	Class* classes[NUM_CLASSES]; // 4(tamaño puntero) * 10 
+};
+
+int lmao()
 {
 	/*
 	//Array estatico de 4 elementos
@@ -73,12 +90,51 @@ int main()
 	std::cout << *y << *x << std::endl;
 	*/
 	// 5.
+	/*
 	int a= 4
 	int& x= a;
 	int b = 4;
 
 	int* y = &a;
-
+	*/
 	
+
+	//8
+
+	School enti;
+	enti.schoolName = "ENTI-UB";
+	
+	Class tecnologiesProgramacio;
+	tecnologiesProgramacio.className = "Tecnologies de la Programacio";
+	tecnologiesProgramacio.students[0].name = "Negro ";
+	tecnologiesProgramacio.students[0].id = 29700;
+	tecnologiesProgramacio.students[0].age = 30;
+	
+	tecnologiesProgramacio.students[1].name = "Alberto ";
+	tecnologiesProgramacio.students[1].id = 29700;
+	tecnologiesProgramacio.students[1].age = 19;
+
+	for (int i = 0; i < NUM_STUDENTS; i++) {
+		if (tecnologiesProgramacio.students[i].name[0] == 'A') {
+			std::cout << tecnologiesProgramacio.students[i].name << std::endl;
+		}
+		
+		if (tecnologiesProgramacio.students[i].age >= 30) {
+			std::cout << tecnologiesProgramacio.students[i].name << std::endl;
+		}
+	}
+
+	for (int i = 0; i < NUM_CLASSES; i++) {
+		enti.classes[i] = nullptr;//anular todos los punteros dentro del struc
+	}
+	enti.classes[0] = &tecnologiesProgramacio;
+
+	for (int i = 0; i < NUM_CLASSES; i++) {
+		if (enti.classes[i] != nullptr && enti.classes[i]->className != "") {
+			std::cout << enti.classes[i]->className << std::endl;
+			//std::cout << (*enti.classes[i])className << std::endl; lo mismo que la linea de arriba
+
+		}
+	}
 	
 }
